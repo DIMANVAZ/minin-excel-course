@@ -1,5 +1,5 @@
-<mxfile host="app.diagrams.net" modified="2021-02-22T10:51:32.663Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36" etag="ZMS6tSkUSZZ2IcSKGp1i" version="14.2.9" type="github">
-  <diagram id="Bh1sf0Nj13foPq0vT2-O" name="Page-1">
+<mxfile host="app.diagrams.net" modified="2021-02-22T18:25:09.994Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36" etag="Yl4ZvAKzaMMIPBij9vVZ" version="14.4.2" type="github" pages="2">
+  <diagram id="Bh1sf0Nj13foPq0vT2-O" name="Структура CSS">
     <mxGraphModel dx="1038" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
@@ -112,6 +112,14 @@
         <mxCell id="McrlcuIPDPFZixJVKzLu-11" value="Table" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="60" y="260" width="40" height="20" as="geometry" />
         </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="81fbMncttsN75E2P6AMs" name=" Компоненты">
+    <mxGraphModel dx="1038" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="Lofi-L4fhnjghPMLTl3c-0" />
+        <mxCell id="Lofi-L4fhnjghPMLTl3c-1" parent="Lofi-L4fhnjghPMLTl3c-0" />
       </root>
     </mxGraphModel>
   </diagram>
