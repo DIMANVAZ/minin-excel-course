@@ -41,8 +41,32 @@ class Dom{
         else {
             this.$el.appendChild(node)
         }
-
         return this
+    }
+
+    get data() {
+        return this.$el.dataset
+    }
+
+    closest(selector) {
+        return $(this.$el.closest(selector))
+    }
+
+    getCoords(){
+        return this.$el.getBoundingClientRect() //вернёт объект DOMRect из кучи координат и широт :)
+    }
+
+    findAll(selector) { // метод, чтобы искать чисто по экземпляру класса ДОМ, т.е. внутри себя
+        return this.$el.querySelectorAll(selector)
+    }
+
+    css(styles = {}){ //принимает объект из стилей типа {height:'24px', color:'red'}
+      // так как в объекте стилей может быть много элементов, то добываем их и крутим цикл
+      Object
+          .keys(styles)
+          .forEach(key=> {
+          this.$el.style[key] = styles[key];
+      })
     }
 }
 
