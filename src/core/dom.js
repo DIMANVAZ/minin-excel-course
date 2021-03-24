@@ -16,6 +16,17 @@ class Dom{
         return this.$el.outerHTML.trim() //а если ничего не передали, то возвращаем обрезанную обёртку this.$el
     }
 
+    text(text){
+        if (typeof text === 'string'){
+            this.$el.textContent = text
+            return this
+        }
+        if (this.$el.tagName.toLowerCase() === 'input'){
+            return this.$el.value.trim()
+        }
+        return this.$el.textContent.trim()
+    }
+
     clear() {
         this.html('') //очистим HTML
         return this
@@ -27,6 +38,10 @@ class Dom{
 
     off(eventType, callback) {
         this.$el.removeEventListener(eventType, callback)
+    }
+
+    find(selector) {        // находит элемент по селектору
+        return $(this.$el.querySelector(selector))
     }
 
     //element
@@ -67,6 +82,32 @@ class Dom{
           .forEach(key=> {
           this.$el.style[key] = styles[key];
       })
+    }
+
+    id(parse){      //метод для получения айдишника ячейки в формате строка:столбец
+        if(parse){
+            const parsed = this.id().split(':')
+            return {
+                row: +parsed[0],
+                col: +parsed[1]
+            }
+        }
+        return this.data.id
+    }
+
+    focus(){
+        this.$el.focus()
+        return this
+    }
+
+    addClass(className){
+        this.$el.classList.add(className)
+        return this
+    }
+
+    removeClass(className) {
+        this.$el.classList.remove(className)
+        return this
     }
 }
 
