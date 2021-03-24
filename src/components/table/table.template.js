@@ -4,10 +4,24 @@ const CODES = {
     Z:90
 }
 
-function toCell(_, col){        //возвращает ячейку
-    return `
-    <div class="cell" contenteditable data-col="${col}"></div>
-    `
+//function toCell(row, col){        //возвращает ячейку
+//    return `
+//    <div class="cell" contenteditable data-col="${col}" data-row="${row}"></div>
+//    `
+//}
+
+function toCell(row){   // создание ячейки с координатами в виде data-id №строки : №столбца
+    return function(_, col){
+        return `
+        <div
+            class="cell"
+            contenteditable
+            data-col="${col}"
+            data-type="cell"
+            data-id="${row}:${col}"
+        ></div>
+        `
+    }
 }
 
 function toColumn(col, index){ //   функция принимает значение в т.ч. индекс, так как функцию подставляют в .map()
@@ -47,13 +61,14 @@ export function createTable(rowsCount = 15){        //rows - строки, cols 
 
     rows.push(createRow(null, cols)) // в массив строк вставили горизонт массив столбцов. А надо вставить ещё и остальные
 
-    for (let i = 0; i < rowsCount; i++) {
+    for (let row = 0; row < rowsCount; row++) {
         const cells = new Array(colsCount)
             .fill('')
-            .map(toCell)
+            //.map((_, col) => toCell(row, col))
+            .map(toCell(row))
             .join('')
 
-    rows.push(createRow(i+1, cells)) //Вставляем остальные строки (по факту - ячейки)
+    rows.push(createRow(row + 1, cells)) //Вставляем остальные строки (по факту - ячейки)
                                            // i+1 - чтобы ячейки нумеровались с 1, а не с 0
                                            // функция по умолчанию возвращает Undefined
     }
