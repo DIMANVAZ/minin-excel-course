@@ -1,5 +1,6 @@
 //Pure functions - независимая функция, не взаимодействующая с глобальными переменными
 // а берущая какие-то входные данные и выдающая результат
+import {defaultStyles} from "@/constants";
 
 export function capitalize(string) {
     if(typeof string !== 'string') {
@@ -16,4 +17,42 @@ export function range(start, end) {
     return new Array(end - start +1)
         .fill('')
         .map((_, index) => start + index)
+}
+
+export function storage(key, data = null) { // функция для работы с LocalStorage - она одновременно и геттер, и сеттер
+    if(!data) {
+        return JSON.parse(localStorage.getItem(key))
+    }
+        localStorage.setItem(key, JSON.stringify(data))
+}
+
+export function isEqual(a, b){
+    if (typeof a === 'object' && typeof b === 'object'){
+        return JSON.stringify(a) === JSON.stringify(b)
+    }
+    return a === b
+}
+
+export function camelToDashCase(str){
+    //return str.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
+    return str.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
+}
+
+export function toInlineStyles(styles = {}){
+    return Object.keys(styles)
+        .map(key => `${camelToDashCase(key)}: ${styles[key]}`)        //'font-weight: bold; text-decoration: underline;'
+        .join(';')
+}
+
+export function debounce(fn, wait){
+    let timeout
+    return function(...args) {
+        const later = () => {
+            clearTimeout(timeout)
+            //eslint-disable-next-line
+            fn.apply(this, args) //это для сохранения контекста - помним, что ()=>{} + THIS.   = ТОНКОСТИ
+        }
+        clearTimeout(timeout)
+        timeout = setTimeout(later, wait)
+    }
 }

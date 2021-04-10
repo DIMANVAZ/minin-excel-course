@@ -14,11 +14,11 @@ export class DomListener {
     initDOMListeners() {
         //console.log(this.listeners); //выдаёт 4 массива, 3 пустых, у третьего ["input"]
         this.listeners.forEach(listener => {    //listener - например, input или click
-            const method = getMethodName(listener)
+            const method = getMethodName(listener) //делает из "listener"->"onListener"
             if(!this[method]) {                 // это если вдруг метод не определён
-                const name = this.name || ''    //имя это приходит к нам из ExcelComponent
+                const name = this.name || ''
                 throw new Error(
-                    `Method ${method} is not implemented in ${name} Component`)
+                    `Method ${method} is not implemented in ${name} Component`) //имя это приходит к нам из ExcelComponent
             }
             this[method] = this[method].bind(this)//это мы зафиксировали этот байнд, чтобы потом его можно было
                                                   // найти и удалить в removeDOMListeners
@@ -39,6 +39,6 @@ export class DomListener {
 //input => onInput
 function getMethodName(eventName) {
     //return 'on'+capitalize(eventName)
-    return `on${capitalize(eventName)}`
+    return 'on'+ capitalize(eventName)
 }
 
