@@ -14,16 +14,21 @@ export class TableSelection {
     }
 
     clear(){
-        this.group.forEach($c => $c.removeClass(TableSelection.className))
+        this.group.forEach($el => $el.removeClass(TableSelection.className))
         this.group = []
     }
-        //deselect($el){  --- это был мой хороший вариант метода clear()
-        //    this.group.pop().removeClass("selected")
-        //}
+
+    get selectedIds(){
+        return this.group.map($el => $el.id())
+    }
 
     selectGroup($group = []){
         this.clear();
         this.group = $group
         this.group.forEach($el => $el.addClass(TableSelection.className))
+    }
+
+    applyStyle(style) {
+        this.group.forEach($el => $el.css(style))
     }
 }

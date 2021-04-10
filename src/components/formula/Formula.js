@@ -8,13 +8,16 @@ export class Formula extends ExcelComponent {
         super($root, {
             name: 'Formula',
             listeners: ['input','keydown'], //-!- keydown КРАСАВА!
+            subscribe: ['currentText'],
             ...options
         })
     }
 
     toHTML() {
-        return `<div class="info">fx</div>
-            <div id="formula" class="input" contenteditable spellcheck="false"></div>`;
+        return `
+            <div class="info">fx</div>
+            <div id="formula" class="input" contenteditable spellcheck="false"></div>
+           `
     }
 
     init(){
@@ -23,23 +26,25 @@ export class Formula extends ExcelComponent {
         this.$formula = this.$root.find('#formula')
             //делаем, чтобы при переходе на ячейку КЛАВИШАМИ её содержимое показывалось бы в поле формулы:
         this.$on('table:select', $cell => {
-            this.$formula.text($cell.text());
+            this.$formula.text($cell.data.value)
         })
             //делаем, чтобы изменении содержимого ячейки эти изменения синхронно происходили бы и в поле формулы
-        this.$on('table:input', $cell => {
-            this.$formula.text($cell.text());
-        })
+    }
+
+    storeChanged({currentText}){
+        this.$formula.text(currentText)
     }
 
     onInput(event) {
-        this.$emit('formula:input', $(event.target).text())           // $emit - из ЭксельКомпонент
+        const text = $(event.target).text() //------------------------!--------добавил из гитхаба
+        this.$emit('formula:input', text)//$(event.target).text())           // $emit - из ЭксельКомпонент
     }
 
-     onKeydown(event) {          //---!---КРАСАВА
+     onKeydown(event) {
         const keys = ['Enter','Tab']
         if(keys.includes(event.key) && !event.shiftKey) { // про !event.shiftkey - это я придумал, чтобы перенос текста делать
             event.preventDefault()
-            this.$emit('formula:Enter') // у него - formula:done
+            this.$emit('formula:done') // у него - formula:done
         }
     }
 

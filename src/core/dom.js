@@ -17,7 +17,7 @@ class Dom{
     }
 
     text(text){
-        if (typeof text === 'string'){
+        if (typeof text !== 'undefined'){
             this.$el.textContent = text
             return this
         }
@@ -80,8 +80,15 @@ class Dom{
       Object
           .keys(styles)
           .forEach(key=> {
-          this.$el.style[key] = styles[key];
+          this.$el.style[key] = styles[key]
       })
+    }
+
+    getStyles(styles = []) {
+        return styles.reduce((res, s) => {
+            res[s] = this.$el.style[s]
+            return res
+        }, {})
     }
 
     id(parse){      //метод для получения айдишника ячейки в формате строка:столбец
@@ -98,6 +105,14 @@ class Dom{
     focus(){
         this.$el.focus()
         return this
+    }
+
+    attr(name, value){
+        if(value){
+            this.$el.setAttribute(name, value)
+            return this
+        }
+        return this.$el.getAttribute(name)
     }
 
     addClass(className){
@@ -117,7 +132,7 @@ export function $(selector){ //----СОЗДАЁТ НОВЫЙ ЭКЗЕМПЛЯР 
 }
 
 $.create = (tagname, classes = '') => { //СОЗДАЁТ НОВЫЙ ЭЛЕМЕНТ ИЗ ТЕГОВ И ДАЖЕ С КЛАССАМИ(если их ей передали)
-    // это метод функции $, так как она возвращает экземпляр класса DOM
+    // это новый метод экземпляра класса DOM (который возвращается из функции $)
     const el = document.createElement(tagname);
     if (classes) {
         el.classList.add(classes);
