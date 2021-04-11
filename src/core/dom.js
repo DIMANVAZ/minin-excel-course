@@ -16,6 +16,11 @@ class Dom{
         return this.$el.outerHTML.trim() //а если ничего не передали, то возвращаем обрезанную обёртку this.$el
     }
 
+    clear() {
+        this.html('') //очистим HTML
+        return this
+    }
+
     text(text){
         if (typeof text !== 'undefined'){
             this.$el.textContent = text
@@ -25,11 +30,6 @@ class Dom{
             return this.$el.value.trim()
         }
         return this.$el.textContent.trim()
-    }
-
-    clear() {
-        this.html('') //очистим HTML
-        return this
     }
 
     on(eventType, callback) {
