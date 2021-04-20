@@ -44,7 +44,9 @@ export function toInlineStyles(styles = {}){
         .join(';')
 }
 
-export function debounce(fn, wait){
+export function debounce(fn, wait){ //функция для задержки (тут исп-ся для предотвращения слишком частых испусканий обновлений
+    //например, при переименовании таблицы - чтобы обновлённый объект не улетал бы при каждой новой букве
+    // и не делал таким образом сильную загрузку памяти и т.п.
     let timeout
     return function(...args) {
         const later = () => {
@@ -57,7 +59,7 @@ export function debounce(fn, wait){
     }
 }
 
-export function clone(obj) {
+export function clone(obj) { //клонирует объект
     return JSON.parse(JSON.stringify(obj))
 }
 

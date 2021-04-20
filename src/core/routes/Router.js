@@ -32,9 +32,9 @@ export class Router{
 
         this.$placeholder.clear()
 
-        const Page = ActiveRoute.path.includes('excel')
-            ? this.routes.excel
-            : this.routes.dashboard
+        const Page = ActiveRoute.path.includes('excel') //если в адресной строке после #встретится слово excel
+            ? this.routes.excel //то тогда нам отрисует саму таблицу
+            : this.routes.dashboard //а иначе - заглавную страницу
 
         this.page = new Page(ActiveRoute.param)
 
